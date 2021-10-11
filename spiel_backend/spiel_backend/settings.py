@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'story_submission.apps.StorySubmissionConfig',
+    'comments.apps.CommentsConfig',
 ]
 
 MIDDLEWARE = [
