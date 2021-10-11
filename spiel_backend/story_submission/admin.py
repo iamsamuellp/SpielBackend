@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Story_Submission
+from .models import StorySubmission
 
-admin.site.register(Story_Submission)
+admin.site.register(StorySubmission)
