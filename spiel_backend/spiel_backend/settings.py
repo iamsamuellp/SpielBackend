@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'story_submission.apps.StorySubmissionConfig',
     'comments.apps.CommentsConfig',
     'replys.apps.ReplysConfig',
+    'employees.apps.EmployeesConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework_simplejwt.authentication.JWTAuthentication',)
 }
+
+
+AUTH_USER_MODEL = 'authentication.User'
+
 try:
     from spiel_backend.local_settings import*
 except ImportError:
