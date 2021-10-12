@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'story_submission.apps.StorySubmissionConfig',
     'comments.apps.CommentsConfig',
+    'replys.apps.ReplysConfig',
 ]
 
 MIDDLEWARE = [

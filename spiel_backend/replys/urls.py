@@ -1,8 +1,8 @@
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from comments import views
+from replys import views
 
 
 urlpatterns = [
-    path('', views.CommentList.as_view())
+    path('',views.ReplysList.as_view())
 ]

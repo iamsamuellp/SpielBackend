@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import serializers, status 
 from rest_framework. views import APIView
 from rest_framework.response import Response 
@@ -7,7 +6,7 @@ from rest_framework .decorators import api_view ,permission_classes
 from .models import Comment
 from .serializers import CommentSerializer
 
-class Commentslist(APIView):
+class CommentList(APIView):
 
   permission_classes = [AllowAny]
 
