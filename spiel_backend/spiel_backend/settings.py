@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'story_submission.apps.StorySubmissionConfig',
     'comments.apps.CommentsConfig',
     'replys.apps.ReplysConfig',
-    'employees.apps.EmployeesConfig',
+    
 ]
 
 MIDDLEWARE = [
