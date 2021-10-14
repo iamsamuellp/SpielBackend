@@ -1,3 +1,4 @@
+import re
 from django.core.checks import messages
 from rest_framework import status
 from rest_framework.views import APIView
@@ -21,10 +22,38 @@ def get_all_stories(requset):
     serializer = StorySerializer(stories, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_single_stories(request,pk):
+    story = StorySubmission.objects.get(pk=pk)
+    serializer = StorySerializer(story)
+    return Response(serializer.data)
+  
+# @api_view(['PUT'])
+# @permission_classes([IsAuthenticated])
+# def edit_story (request):  
+#     story = StorySubmission
+  
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_published_list(request):
+    story = StorySubmission.objects.filter(approved_story=True)
+    if request.method=='Get':
+      serializer = StorySerializer(story, many=True)
+      return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_unpublished_list(request):
+    story = StorySubmission.objects.filter(approved_story=False)
+    if request.method=='Get':
+      serializer = StorySerializer(story, many=True)
+      return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def user_story(request):
+def new_story(request):
   if request.method == 'POST':
       serializer= StorySerializer(data=request.data)
       if serializer.is_valid():
@@ -35,7 +64,7 @@ def user_story(request):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_story(request):
+def remove_story(request):
   if request.method == 'DELETE':
     serializer = StorySerializer(data=request.data)
   if serializer.is_valid():

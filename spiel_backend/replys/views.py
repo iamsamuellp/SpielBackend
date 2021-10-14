@@ -13,3 +13,33 @@ def get_all_replys(request):
   reply = Reply.objects.all()
   serializer = ReplySerializer(reply,many=True)
   return Response(serializers.data)
+
+
+@api_view(['POST'])  
+@permission_classes([IsAuthenticated])
+def add_replys(request):
+ if request.method == 'POST':
+      serializer= ReplySerializer(data=request.data)
+      if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_204_NO_CREATED)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# @api_view(['PUT'])
+# @permission_classes([IsAuthenticated])
+# def edit_replys(request):
+
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_reply(request):
+  if request.method == 'DELETE':
+    serializer = ReplySerializer(data=request.data)
+  if serializer.is_valid():
+    serializer.delete(user=request.user) 
+    return Response({'message':'the Reply was deleted succesfully '}, status=status.HTTP_204_NO_CONTENT ) 
+
+
+
