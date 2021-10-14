@@ -4,5 +4,5 @@ from replys import views
 
 
 urlpatterns = [
-    path('',views.ReplysList.as_view())
+    path('all',views.get_all_replys)
 ]

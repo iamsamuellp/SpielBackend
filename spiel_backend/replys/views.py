@@ -6,11 +6,10 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Reply
 from .serializers import ReplySerializer
 
-class ReplysList(APIView):
-  
-  permission_classes=[AllowAny]
 
-def get(self,request):
+@api_view(['GET'])  
+@permission_classes([AllowAny])
+def get_all_replys(request):
   reply = Reply.objects.all()
   serializer = ReplySerializer(reply,many=True)
   return Response(serializers.data)

@@ -6,12 +6,10 @@ from rest_framework .decorators import api_view ,permission_classes
 from .models import Comment
 from .serializers import CommentSerializer
 
-class CommentList(APIView):
 
-  permission_classes = [AllowAny]
-
-def get(self,request):
-    comment = Comment.objects.all()
-    serializer = CommentSerializer(comment, many=True)
-    return Response(serializers.data)
-  
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_comments(request):
+  replys=Comment.objects.all()
+  serializer = CommentSerializer(replys, many=True)
+  return Response(serializers.data)

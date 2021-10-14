@@ -4,5 +4,5 @@ from comments import views
 
 
 urlpatterns = [
-    path('', views.CommentList.as_view())
+    path('all', views.get_all_comments)
 ]
