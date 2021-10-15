@@ -4,7 +4,7 @@ from replys import views
 
 
 urlpatterns = [
-    path('all',views.get_all_replys),
-    path('new',views.add_replys),
-    path('all',views.delete_reply)
+    path('all/',views.get_all_replys),
+    path('new/',views.add_replys),
+    path('del/',views.delete_reply)
 ]

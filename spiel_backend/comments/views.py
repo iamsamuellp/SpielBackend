@@ -12,7 +12,7 @@ from .serializers import CommentSerializer
 def get_all_comments(request):
   replys=Comment.objects.all()
   serializer = CommentSerializer(replys, many=True)
-  return Response(serializers.data)
+  return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

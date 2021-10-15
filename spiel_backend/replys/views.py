@@ -12,7 +12,7 @@ from .serializers import ReplySerializer
 def get_all_replys(request):
   reply = Reply.objects.all()
   serializer = ReplySerializer(reply,many=True)
-  return Response(serializers.data)
+  return Response(serializer.data)
 
 
 @api_view(['POST'])  
