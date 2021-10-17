@@ -20,17 +20,42 @@ def get_all_stories(requset):
     serializer = StorySerializer(stories, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_single_stories(request,pk):
-    story = StorySubmission.objects.get(pk=pk)
-    serializer = StorySerializer(story)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def get_single_stories(request,pk):
+#     story = StorySubmission.objects.get(pk=pk)
+#     serializer = StorySerializer(story)
+#     return Response(serializer.data)
   
 # @api_view(['PUT'])
 # @permission_classes([IsAuthenticated])
 # def edit_story (request):  
 #     story = StorySubmission
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def story_detail(request, pk):
+    try: 
+        story = StorySubmission.objects.get(pk=pk) 
+    except StorySubmission.DoesNotExist: 
+        return Response({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
+    if request.method == 'GET': 
+        serializer = StorySerializer(story) 
+        return Response(serializer.data) 
+ 
+    elif request.method == 'PUT': 
+        story_data = StorySubmission.objects.get(pk=pk) 
+        serializer = StorySerializer(story, data=story_data) 
+        if serializer.is_valid(): 
+            serializer.save() 
+            return Response(serializer.data) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+    elif request.method == 'DELETE': 
+        story.delete() 
+        return Response({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
   
 @api_view(['GET'])
 @permission_classes([AllowAny])
