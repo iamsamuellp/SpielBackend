@@ -4,4 +4,4 @@ from .models import StorySubmission
 class StorySerializer(serializers.ModelSerializer):
   class Meta:
     model= StorySubmission
-    fields =['id', 'title', 'author','story','genre','user_id']
+    fields =['id', 'title', 'author','story','genre','user_id','approved_story','published_date']

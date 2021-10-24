@@ -7,6 +7,6 @@ urlpatterns = [
   path('pub/',views.get_published_list),
   path('unpub/',views.get_unpublished_list),
   path('new/',views.new_story),
-  path('de/<int:pk>/',views.remove_story),
+  path('de//',views.remove_story),
   path('<int:pk>/',views.story_detail),
 ]

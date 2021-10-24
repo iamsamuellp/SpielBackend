@@ -21,14 +21,10 @@ def add_replys(request):
  if request.method == 'POST':
       serializer= ReplySerializer(data=request.data)
       if serializer.is_valid():
-        serializer.save(user=request.user)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_204_NO_CREATED)
       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-# @api_view(['PUT'])
-# @permission_classes([IsAuthenticated])
-# def edit_replys(request):
 
 
 
@@ -40,6 +36,5 @@ def delete_reply(request):
   if serializer.is_valid():
     serializer.delete(user=request.user) 
     return Response({'message':'the Reply was deleted succesfully '}, status=status.HTTP_204_NO_CONTENT ) 
-
 
 

@@ -5,6 +5,5 @@ from replys import views
 
 urlpatterns = [
     path('all/',views.get_all_replys),
-    path('new/',views.add_replys),
-    path('del/',views.delete_reply)
+    path('new/<int:pk>/',views.add_replys)
 ]
