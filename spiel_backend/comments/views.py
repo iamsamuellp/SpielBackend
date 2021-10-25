@@ -7,6 +7,7 @@ from rest_framework. permissions import IsAuthenticated, AllowAny
 from rest_framework .decorators import api_view ,permission_classes
 
 import comments
+import story_submission
 from .models import Comment
 from .serializers import CommentSerializer
 from django.http.response import Http404
@@ -19,7 +20,7 @@ def get_all_comments(request):
   serializer = CommentSerializer(comments, many=True)
   return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST','GET'])
 @permission_classes([AllowAny])
 def new_comment(request):
   if request.method == 'POST':
@@ -28,6 +29,10 @@ def new_comment(request):
       serializer.save()
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)  
+  elif request.method ==  'GET':
+    stories= Comment.objects.filter(user_id=request.story.id)
+    serializer =CommentSerializer(stories, many=True)
+    return Response(serializer.data)
 
 
 
